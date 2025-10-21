@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigation } from '../contexts/NavigationContext';
+import { Link as CustomLink } from '../components/CustomLink';
 
 const IMAGE_SRC = process.env.PUBLIC_URL + '/images/intro.jpeg';
 const SEATTLE_SRC = process.env.PUBLIC_URL + '/seattle.jpeg';
@@ -86,14 +87,16 @@ function LoadingReveal({ onLoadComplete }: LoadingRevealProps): React.ReactEleme
 
             {phase === 'done' && (
                 <>
-                    <nav className="final-nav" aria-label="Primary">
+                    <nav className="final-nav animate" aria-label="Primary">
                         <ul>
-                            <li><Link to="/projects">Projects</Link></li>
-                            <li><Link to="/accolades">Accolades</Link></li>
-                            <li><Link to="/contact">Contact</Link></li>
+                            <li><CustomLink to="/skills">Skills</CustomLink></li>
+                            <li><CustomLink to="/projects">Projects</CustomLink></li>
+                            <li><CustomLink to="/" className="nav-brand">By John Michael</CustomLink></li>
+                            <li><CustomLink to="/show">Show</CustomLink></li>
+                            <li><CustomLink to="/donate">Donate</CustomLink></li>
                         </ul>
                     </nav>
-                    <div className="final-top">John Michael</div>
+                    <div className="final-top animate">John Michael</div>
                 </>
             )}
 
@@ -117,8 +120,34 @@ function LoadingReveal({ onLoadComplete }: LoadingRevealProps): React.ReactEleme
             </div>
 
             {phase === 'done' && (
-                <div className="final-bottom">Creative Director</div>
+                <div className="final-bottom animate">Creative Director</div>
             )}
+        </div>
+    );
+}
+
+// Simple image display for when coming from navigation
+function SimpleImageDisplay(): React.ReactElement {
+    return (
+        <div className="simple-image-display">
+            <nav className="final-nav" aria-label="Primary">
+                <ul>
+                    <li><CustomLink to="/skills">Skills</CustomLink></li>
+                    <li><CustomLink to="/projects">Projects</CustomLink></li>
+                    <li><CustomLink to="/" className="nav-brand">By John Michael</CustomLink></li>
+                    <li><CustomLink to="/show">Show</CustomLink></li>
+                    <li><CustomLink to="/donate">Donate</CustomLink></li>
+                </ul>
+            </nav>
+            <div className="final-top">John Michael</div>
+            <div className="simple-image-container">
+                <img 
+                    src={IMAGE_SRC} 
+                    alt="John Michael" 
+                    className="simple-image"
+                />
+            </div>
+            <div className="final-bottom">Creative Director</div>
         </div>
     );
 }
@@ -127,6 +156,8 @@ const Home: React.FC = () => {
     const [imageVisible, setImageVisible] = useState<boolean>(false);
     const [videoVisible, setVideoVisible] = useState<boolean>(false);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [cameFromNavigation, setCameFromNavigation] = useState<boolean>(false);
+    const { isNavigating, setIsNavigating } = useNavigation();
     const imageRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLDivElement>(null);
 
@@ -136,8 +167,16 @@ const Home: React.FC = () => {
     };
 
     useEffect(() => {
-        // Prevent scrolling until loaded
-        if (!isLoaded) {
+        // If we came from navigation, mark it and reset the navigation state immediately
+        if (isNavigating) {
+            setCameFromNavigation(true);
+            setIsNavigating(false); // Reset immediately
+        }
+    }, [isNavigating, setIsNavigating]);
+
+    useEffect(() => {
+        // Prevent scrolling until loaded OR if we came from navigation
+        if (!isLoaded && !cameFromNavigation) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'auto';
@@ -146,7 +185,7 @@ const Home: React.FC = () => {
         return () => {
             document.body.style.overflow = 'auto';
         };
-    }, [isLoaded]);
+    }, [isLoaded, cameFromNavigation]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -175,11 +214,15 @@ const Home: React.FC = () => {
     return (
         <div className="App">
             <div className="first-section">
-                <LoadingReveal onLoadComplete={() => setIsLoaded(true)} />
+                {cameFromNavigation ? (
+                    <SimpleImageDisplay />
+                ) : (
+                    <LoadingReveal onLoadComplete={() => setIsLoaded(true)} />
+                )}
                 
                 <a 
                     href="#next-section" 
-                    className={`scroll-down ${isLoaded ? 'fade-in' : ''}`} 
+                    className={`scroll-down ${isLoaded || cameFromNavigation ? 'fade-in' : ''}`} 
                     onClick={(e) => { 
                         e.preventDefault(); 
                         scrollToNext(); 
@@ -230,7 +273,7 @@ const Home: React.FC = () => {
                 <div className="content-wrapper">
                     <div className="text-content">
                         <h2>Collaborate</h2>
-                        <p>For those seeking custom websites defined by detail, design clarity, and seamless backend integration, <Link to="/contact">contact me here</Link>. Past projects and experience are available <Link to="/projects">here</Link> for a closer look. I occasionally write about the art and media that inform my design perspective. My recognitions and accolades are written <Link to="/accolades">here</Link>.</p>
+                        <p>For those seeking custom websites defined by detail, design clarity, and seamless backend integration, <CustomLink to="/contact">contact me here</CustomLink>. Past projects and experience are available <CustomLink to="/projects">here</CustomLink> for a closer look. I occasionally write about the art and media that inform my design perspective. My recognitions and accolades are written <CustomLink to="/accolades">here</CustomLink>.</p>
                     </div>
                     <div className="image-content" ref={imageRef}>
                         <img 
