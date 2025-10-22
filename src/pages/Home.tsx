@@ -3,7 +3,7 @@ import { useNavigation } from '../contexts/NavigationContext';
 import { Link as CustomLink } from '../components/CustomLink';
 
 const IMAGE_SRC = process.env.PUBLIC_URL + '/images/intro.jpeg';
-const SEATTLE_SRC = process.env.PUBLIC_URL + '/seattle.jpeg';
+const SEATTLE_SRC = process.env.PUBLIC_URL + '/images/seattle.jpeg';
 const PHILOSOPHY_VIDEO = process.env.PUBLIC_URL + '/videos/philosophy.mov';
 const COLLABORATE_SRC = process.env.PUBLIC_URL + '/images/suit.jpeg';
 
@@ -89,10 +89,8 @@ function LoadingReveal({ onLoadComplete }: LoadingRevealProps): React.ReactEleme
                 <>
                     <nav className="final-nav animate" aria-label="Primary">
                         <ul>
-                            <li><CustomLink to="/skills">Skills</CustomLink></li>
                             <li><CustomLink to="/projects">Projects</CustomLink></li>
                             <li><CustomLink to="/" className="nav-brand">By John Michael</CustomLink></li>
-                            <li><CustomLink to="/show">Show</CustomLink></li>
                             <li><CustomLink to="/donate">Donate</CustomLink></li>
                         </ul>
                     </nav>
@@ -132,10 +130,8 @@ function SimpleImageDisplay(): React.ReactElement {
         <div className="simple-image-display">
             <nav className="final-nav" aria-label="Primary">
                 <ul>
-                    <li><CustomLink to="/skills">Skills</CustomLink></li>
                     <li><CustomLink to="/projects">Projects</CustomLink></li>
                     <li><CustomLink to="/" className="nav-brand">By John Michael</CustomLink></li>
-                    <li><CustomLink to="/show">Show</CustomLink></li>
                     <li><CustomLink to="/donate">Donate</CustomLink></li>
                 </ul>
             </nav>
@@ -153,12 +149,14 @@ function SimpleImageDisplay(): React.ReactElement {
 }
 
 const Home: React.FC = () => {
-    const [imageVisible, setImageVisible] = useState<boolean>(false);
+    const [seattleImageVisible, setSeattleImageVisible] = useState<boolean>(false);
+    const [suitImageVisible, setSuitImageVisible] = useState<boolean>(false);
     const [videoVisible, setVideoVisible] = useState<boolean>(false);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [cameFromNavigation, setCameFromNavigation] = useState<boolean>(false);
     const { isNavigating, setIsNavigating } = useNavigation();
-    const imageRef = useRef<HTMLDivElement>(null);
+    const seattleImageRef = useRef<HTMLDivElement>(null);
+    const suitImageRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLDivElement>(null);
 
     const scrollToNext = (): void => {
@@ -191,8 +189,10 @@ const Home: React.FC = () => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    if (entry.target === imageRef.current) {
-                        setImageVisible(true);
+                    if (entry.target === seattleImageRef.current) {
+                        setSeattleImageVisible(true);
+                    } else if (entry.target === suitImageRef.current) {
+                        setSuitImageVisible(true);
                     } else if (entry.target === videoRef.current) {
                         setVideoVisible(true);
                     }
@@ -201,8 +201,11 @@ const Home: React.FC = () => {
             { threshold: 0.3 }
         );
 
-        if (imageRef.current) {
-            observer.observe(imageRef.current);
+        if (seattleImageRef.current) {
+            observer.observe(seattleImageRef.current);
+        }
+        if (suitImageRef.current) {
+            observer.observe(suitImageRef.current);
         }
         if (videoRef.current) {
             observer.observe(videoRef.current);
@@ -237,13 +240,13 @@ const Home: React.FC = () => {
                 <div className="content-wrapper">
                     <div className="text-content">
                         <h2>John Michael</h2>
-                        <p>Born in Seattle, surrounded by art, technology, and moody cityscapes, a mindset took shape that valued both creativity and precision. A fascination with technology turned into long hours of learning how things worked beneath the surface of code. Early on, my passion became clear: to blend art and technology into a single pursuit. In every project, each detail is refined with a perfectionist's eye until the work is complete.</p>
+                        <p>Born in Seattle, surrounded by art, technology, and moody cityscapes, a mindset took shape that valued both creativity and precision. A fascination with technology turned into long hours of learning how things worked beneath the surface. Early on, my passion became clear: to blend art and technology into a single pursuit. In every project, each detail is refined until the work can be called complete.</p>
                     </div>
-                    <div className="image-content" ref={imageRef}>
+                    <div className="image-content" ref={seattleImageRef}>
                         <img 
                             src={SEATTLE_SRC} 
                             alt="Seattle skyline" 
-                            className={`seattle-image ${imageVisible ? 'fade-in' : ''}`}
+                            className={`seattle-image ${seattleImageVisible ? 'fade-in' : ''}`}
                         />
                     </div>
                 </div>
@@ -272,20 +275,21 @@ const Home: React.FC = () => {
             <section id="next-section" className="next-section">
                 <div className="content-wrapper">
                     <div className="text-content">
-                        <h2>Collaborate</h2>
-                        <p>For those seeking custom websites defined by detail, design clarity, and seamless backend integration, <CustomLink to="/contact">contact me here</CustomLink>. Past projects and experience are available <CustomLink to="/projects">here</CustomLink> for a closer look. I occasionally write about the art and media that inform my design perspective. My recognitions and accolades are written <CustomLink to="/accolades">here</CustomLink>.</p>
+                        <h2>Authentically Me</h2>
+                        <p>My pursuit of excellence is God-given; as a result, my life and work are rooted in my faith in the Lord Jesus Christ, who guides my path and decisions. Because of this, I hold myself to the highest standard of excellence—not only in the projects I create, but in the actions I take each day. I can confidently say that whether my actions are public or private, they reflect my values and faith in Him. That same conviction shapes how I create—every detail, seen and unseen, is crafted with care, integrity, and respect for the craft. Each work I complete bears my signature of integrity and devotion.</p>
+                        <p>—By John Michael.</p>
+                        <br/>
+                        <p>To work with me, email me at <strong><a href="mailto:jm@byjohnmichael.com" style={{textDecoration: 'none', color: 'inherit'}}>jm@byjohnmichael.com</a></strong></p>
                     </div>
-                    <div className="image-content" ref={imageRef}>
+                    <div className="image-content" ref={suitImageRef}>
                         <img 
                             src={COLLABORATE_SRC} 
                             alt="John Michael in a suit" 
-                            className={`seattle-image ${imageVisible ? 'fade-in' : ''}`}
+                            className={`suit-image ${suitImageVisible ? 'fade-in' : ''}`}
                         />
                     </div>
                 </div>
             </section>
         </div>
     );
-};
-
-export default Home;
+}; export default Home; // By John Michael

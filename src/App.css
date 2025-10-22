@@ -138,6 +138,20 @@
     transform: translateY(0);
 }
 
+.suit-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 800ms ease-out, transform 800ms ease-out;
+}
+
+.suit-image.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Philosophy section */
 .philosophy-section {
     min-height: 100vh;
@@ -381,8 +395,7 @@
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* Page sections */
-.projects-section,
-.contact-section {
+.projects-section {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -659,58 +672,6 @@
     height: 16px;
 }
 
-/* Contact form */
-.contact-form {
-    width: 100%;
-    max-width: 500px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-family: "Helvetica Neue", "Segoe UI", "Arial Narrow", sans-serif;
-    font-weight: 300;
-    color: #111;
-    font-size: 14px;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-family: "Helvetica Neue", "Segoe UI", "Arial Narrow", sans-serif;
-    font-size: 14px;
-    background-color: white;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #111;
-}
-
-.submit-button {
-    background-color: #111;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-family: "Helvetica Neue", "Segoe UI", "Arial Narrow", sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.submit-button:hover {
-    background-color: #333;
-}
 
 /* Link styling for collaboration section */
 .text-content a {

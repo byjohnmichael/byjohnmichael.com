@@ -6,10 +6,8 @@ const Projects: React.FC = () => {
         <div className="App">
             <nav className="nav-immediate" aria-label="Primary">
                 <ul>
-                    <li><CustomLink to="/skills">Skills</CustomLink></li>
                     <li><CustomLink to="/projects">Projects</CustomLink></li>
                     <li><CustomLink to="/" className="nav-brand">By John Michael</CustomLink></li>
-                    <li><CustomLink to="/show">Show</CustomLink></li>
                     <li><CustomLink to="/donate">Donate</CustomLink></li>
                 </ul>
             </nav>
