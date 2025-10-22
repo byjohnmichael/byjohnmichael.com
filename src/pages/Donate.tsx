@@ -17,22 +17,22 @@ const Donate: React.FC = () => {
         },
         {
             name: 'Bitcoin',
-            address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
-            qrUrl: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
+            address: 'bc1q2fd4yaxry938jyyrxssqfq4q02swjq5z5jqp8k',
+            qrUrl: 'bc1q2fd4yaxry938jyyrxssqfq4q02swjq5z5jqp8k',
             className: 'bitcoin-card',
             logo: '/images/logos/bitcoin.png'
         },
         {
             name: 'Ethereum',
-            address: '0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6',
-            qrUrl: '0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6',
+            address: '0x29cffE9c8A1e61Da6CcfC73a3e2Da197E69FDbB7',
+            qrUrl: '0x29cffE9c8A1e61Da6CcfC73a3e2Da197E69FDbB7',
             className: 'ethereum-card',
             logo: '/images/logos/ethereum.png'
         },
         {
             name: 'Solana',
-            address: '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM',
-            qrUrl: '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM',
+            address: 'ChdXmp449T3M87oDvCpTXxgxjTF5A1jic7t94mmj3kvw',
+            qrUrl: 'ChdXmp449T3M87oDvCpTXxgxjTF5A1jic7t94mmj3kvw',
             className: 'solana-card',
             logo: '/images/logos/solana.png'
         }

@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '../contexts/NavigationContext';
 import { Link as CustomLink } from '../components/CustomLink';
 
-const IMAGE_SRC = process.env.PUBLIC_URL + '/images/intro.jpeg';
-const SEATTLE_SRC = process.env.PUBLIC_URL + '/images/seattle.jpeg';
+const IMAGE_SRC = process.env.PUBLIC_URL + '/images/home/intro.jpeg';
+const SEATTLE_SRC = process.env.PUBLIC_URL + '/images/home/seattle.jpeg';
 const PHILOSOPHY_VIDEO = process.env.PUBLIC_URL + '/videos/philosophy.mov';
-const COLLABORATE_SRC = process.env.PUBLIC_URL + '/images/suit.jpeg';
+const COLLABORATE_SRC = process.env.PUBLIC_URL + '/images/home/suit.jpeg';
 
 interface LoadingRevealProps {
     onLoadComplete?: () => void;
@@ -31,10 +31,10 @@ function LoadingReveal({ onLoadComplete }: LoadingRevealProps): React.ReactEleme
     const prefersReducedMotion = usePrefersReducedMotion();
     const [progress, setProgress] = useState<number>(0); // 0..1
     const [phase, setPhase] = useState<LoadingPhase>('loading');
-    const rafRef = useRef<number | null>(null);
-    const startRef = useRef<number | null>(null);
+    const rafRef = React.useRef<number | null>(null);
+    const startRef = React.useRef<number | null>(null);
 
-    const duration = useMemo(() => {
+    const duration = React.useMemo(() => {
         if (prefersReducedMotion) return 1500; // shorter but still noticeable
         return 2000; // 2 seconds
     }, [prefersReducedMotion]);
@@ -149,18 +149,12 @@ function SimpleImageDisplay(): React.ReactElement {
 }
 
 const Home: React.FC = () => {
-    const [seattleImageVisible, setSeattleImageVisible] = useState<boolean>(false);
-    const [suitImageVisible, setSuitImageVisible] = useState<boolean>(false);
-    const [videoVisible, setVideoVisible] = useState<boolean>(false);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [cameFromNavigation, setCameFromNavigation] = useState<boolean>(false);
     const { isNavigating, setIsNavigating } = useNavigation();
-    const seattleImageRef = useRef<HTMLDivElement>(null);
-    const suitImageRef = useRef<HTMLDivElement>(null);
-    const videoRef = useRef<HTMLDivElement>(null);
 
     const scrollToNext = (): void => {
-        const nextSection = document.getElementById('next-section');
+        const nextSection = document.getElementById('about-section');
         nextSection?.scrollIntoView({ behavior: 'smooth' });
     };
 
@@ -185,35 +179,6 @@ const Home: React.FC = () => {
         };
     }, [isLoaded, cameFromNavigation]);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    if (entry.target === seattleImageRef.current) {
-                        setSeattleImageVisible(true);
-                    } else if (entry.target === suitImageRef.current) {
-                        setSuitImageVisible(true);
-                    } else if (entry.target === videoRef.current) {
-                        setVideoVisible(true);
-                    }
-                }
-            },
-            { threshold: 0.3 }
-        );
-
-        if (seattleImageRef.current) {
-            observer.observe(seattleImageRef.current);
-        }
-        if (suitImageRef.current) {
-            observer.observe(suitImageRef.current);
-        }
-        if (videoRef.current) {
-            observer.observe(videoRef.current);
-        }
-
-        return () => observer.disconnect();
-    }, []);
-
     return (
         <div className="App">
             <div className="first-section">
@@ -224,7 +189,7 @@ const Home: React.FC = () => {
                 )}
                 
                 <a 
-                    href="#next-section" 
+                    href="#about-section" 
                     className={`scroll-down ${isLoaded || cameFromNavigation ? 'fade-in' : ''}`} 
                     onClick={(e) => { 
                         e.preventDefault(); 
@@ -236,27 +201,27 @@ const Home: React.FC = () => {
                 </a>
             </div>
             
-            <section id="next-section" className="next-section">
+            <section id="about-section" className="content-section">
                 <div className="content-wrapper">
                     <div className="text-content">
                         <h2>John Michael</h2>
                         <p>Born in Seattle, surrounded by art, technology, and moody cityscapes, a mindset took shape that valued both creativity and precision. A fascination with technology turned into long hours of learning how things worked beneath the surface. Early on, my passion became clear: to blend art and technology into a single pursuit. In every project, each detail is refined until the work can be called complete.</p>
                     </div>
-                    <div className="image-content" ref={seattleImageRef}>
+                    <div className="image-content">
                         <img 
                             src={SEATTLE_SRC} 
                             alt="Seattle skyline" 
-                            className={`seattle-image ${seattleImageVisible ? 'fade-in' : ''}`}
+                            className="content-image"
                         />
                     </div>
                 </div>
             </section>
 
-            <section id="philosophy-section" className="philosophy-section">
+            <section id="philosophy-section" className="content-section philosophy-section">
                 <div className="content-wrapper philosophy-layout">
-                    <div className="video-content" ref={videoRef}>
+                    <div className="video-content">
                         <video 
-                            className={`philosophy-video ${videoVisible ? 'fade-in' : ''}`}
+                            className="content-video"
                             controls
                             muted
                             loop
@@ -272,7 +237,7 @@ const Home: React.FC = () => {
                 </div>
             </section>
 
-            <section id="next-section" className="next-section">
+            <section id="authentic-section" className="content-section">
                 <div className="content-wrapper">
                     <div className="text-content">
                         <h2>Authentically Me</h2>
@@ -281,15 +246,17 @@ const Home: React.FC = () => {
                         <br/>
                         <p>To work with me, email me at <strong><a href="mailto:jm@byjohnmichael.com" style={{textDecoration: 'none', color: 'inherit'}}>jm@byjohnmichael.com</a></strong></p>
                     </div>
-                    <div className="image-content" ref={suitImageRef}>
+                    <div className="image-content">
                         <img 
                             src={COLLABORATE_SRC} 
                             alt="John Michael in a suit" 
-                            className={`suit-image ${suitImageVisible ? 'fade-in' : ''}`}
+                            className="content-image"
                         />
                     </div>
                 </div>
             </section>
         </div>
     );
-}; export default Home; // By John Michael
+}; 
+
+export default Home; // By John Michael
