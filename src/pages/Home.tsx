@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
 import { useNavigation } from '../contexts/NavigationContext';
 import { Link as CustomLink } from '../components/CustomLink';
+import React, { useEffect, useState } from 'react';
 
-const IMAGE_SRC = process.env.PUBLIC_URL + '/images/home/intro.jpeg';
-const SEATTLE_SRC = process.env.PUBLIC_URL + '/images/home/seattle.jpeg';
+const LOAD_SRC = process.env.PUBLIC_URL + '/images/home/load.jpeg';
+const INTRO_SRC = process.env.PUBLIC_URL + '/images/home/intro.jpeg';
 const PHILOSOPHY_SRC = process.env.PUBLIC_URL + '/images/home/philosophy.png';
-const PHILOSOPHY_VIDEO = process.env.PUBLIC_URL + '/videos/philosophy.mov';
-const COLLABORATE_SRC = process.env.PUBLIC_URL + '/images/home/suit.jpeg';
+const PHILOSOPHY_VIDEO = process.env.PUBLIC_URL + '/videos/home/philosophy.mov';
+const AUTHENTICALLY_ME_SRC = process.env.PUBLIC_URL + '/images/home/authentically_me.jpeg';
 
 interface LoadingRevealProps {
     onLoadComplete?: () => void;
@@ -29,11 +29,11 @@ function usePrefersReducedMotion(): boolean {
 }
 
 function LoadingReveal({ onLoadComplete }: LoadingRevealProps): React.ReactElement {
-    const prefersReducedMotion = usePrefersReducedMotion();
-    const [progress, setProgress] = useState<number>(0); // 0..1
     const [phase, setPhase] = useState<LoadingPhase>('loading');
-    const rafRef = React.useRef<number | null>(null);
+    const [progress, setProgress] = useState<number>(0); // 0..1
+    const prefersReducedMotion = usePrefersReducedMotion();
     const startRef = React.useRef<number | null>(null);
+    const rafRef = React.useRef<number | null>(null);
 
     const duration = React.useMemo(() => {
         if (prefersReducedMotion) return 1500; // shorter but still noticeable
@@ -103,7 +103,7 @@ function LoadingReveal({ onLoadComplete }: LoadingRevealProps): React.ReactEleme
                 <div
                     className={`image-bar ${phase !== 'loading' ? 'expand' : ''}`}
                     style={{
-                        backgroundImage: `url(${IMAGE_SRC})`,
+                        backgroundImage: `url(${LOAD_SRC})`,
                         width: `${Math.max(0, Math.min(100, progress * 100))}%`,
                         '--expand-dur': prefersReducedMotion ? '600ms' : '1600ms'
                     } as React.CSSProperties}
@@ -139,7 +139,7 @@ function SimpleImageDisplay(): React.ReactElement {
             <div className="final-top">John Michael</div>
             <div className="simple-image-container">
                 <img 
-                    src={IMAGE_SRC} 
+                    src={LOAD_SRC} 
                     alt="John Michael" 
                     className="simple-image"
                 />
@@ -210,7 +210,7 @@ const Home: React.FC = () => {
                     </div>
                     <div className="image-content">
                         <img 
-                            src={SEATTLE_SRC} 
+                            src={INTRO_SRC} 
                             alt="Seattle skyline" 
                             className="content-image"
                         />
@@ -250,7 +250,7 @@ const Home: React.FC = () => {
                     </div>
                     <div className="image-content">
                         <img 
-                            src={COLLABORATE_SRC} 
+                            src={AUTHENTICALLY_ME_SRC} 
                             alt="John Michael in a suit" 
                             className="content-image"
                         />
@@ -259,6 +259,4 @@ const Home: React.FC = () => {
             </section>
         </div>
     );
-}; 
-
-export default Home; // By John Michael
+}; export default Home; // By John Michael

@@ -241,8 +241,7 @@
 }
 
 .loading-text {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     letter-spacing: 0.14em;
     font-size: 11px;
     color: #111;
@@ -1224,7 +1223,7 @@
     color: #111;
     letter-spacing: 0.5px;
     margin: 0;
-} /* By John Michael */
+}
 
 /* Content sections - New Clean Implementation */
 .content-section {
@@ -1257,4 +1256,4 @@
     opacity: 1;
     transform: none;
     transition: none;
-}
+} /* By John Michael */

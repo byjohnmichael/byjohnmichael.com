@@ -1,5 +1,5 @@
-import React, { useRef, MouseEvent, useEffect } from 'react';
 import { Link as CustomLink } from '../components/CustomLink';
+import React, { useRef, MouseEvent, useEffect } from 'react';
 
 const Projects: React.FC = () => {
     const imageRefs = useRef<(HTMLImageElement | null)[]>([null, null]);
@@ -124,7 +124,4 @@ const Projects: React.FC = () => {
             </section>
         </div>
     );
-};
-
-export default Projects;
-
+}; export default Projects; // By John Michael

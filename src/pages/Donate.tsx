@@ -3,9 +3,9 @@ import { Link as CustomLink } from '../components/CustomLink';
 import QRCode from 'qrcode';
 
 const Donate: React.FC = () => {
-    const cardRefs = useRef<(HTMLDivElement | null)[]>([null, null, null, null]);
     const animationFrameRefs = useRef<(number | undefined)[]>([undefined, undefined, undefined, undefined]);
     const [qrCodeDataURLs, setQrCodeDataURLs] = useState<string[]>(['', '', '', '']);
+    const cardRefs = useRef<(HTMLDivElement | null)[]>([null, null, null, null]);
     
     const donationData = [
         {
@@ -169,6 +169,4 @@ const Donate: React.FC = () => {
             </section>
         </div>
     );
-};
-
-export default Donate;
+}; export default Donate; // By John Michael

@@ -1,11 +1,11 @@
-import './App.css';
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { PageLoader } from './components/PageLoader';
 import { NavigationProvider } from './contexts/NavigationContext';
-import Home from './pages/Home';
+import { PageLoader } from './components/PageLoader';
 import Projects from './pages/Projects';
 import Donate from './pages/Donate';
+import Home from './pages/Home';
+import React from 'react';
+import './App.css';
 
 function App(): React.ReactElement {
     return (
@@ -21,6 +21,4 @@ function App(): React.ReactElement {
             </NavigationProvider>
         </Router>
     );
-}
-
-export default App;
+} export default App; // By John Michael
