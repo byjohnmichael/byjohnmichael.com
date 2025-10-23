@@ -225,6 +225,7 @@ const Home: React.FC = () => {
                             controls
                             muted
                             loop
+                            poster={IMAGE_SRC}
                         >
                             <source src={PHILOSOPHY_VIDEO} type="video/mp4" />
                             Your browser does not support the video tag.
