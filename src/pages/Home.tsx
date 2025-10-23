@@ -4,6 +4,7 @@ import { Link as CustomLink } from '../components/CustomLink';
 
 const IMAGE_SRC = process.env.PUBLIC_URL + '/images/home/intro.jpeg';
 const SEATTLE_SRC = process.env.PUBLIC_URL + '/images/home/seattle.jpeg';
+const PHILOSOPHY_SRC = process.env.PUBLIC_URL + '/images/home/philosophy.png';
 const PHILOSOPHY_VIDEO = process.env.PUBLIC_URL + '/videos/philosophy.mov';
 const COLLABORATE_SRC = process.env.PUBLIC_URL + '/images/home/suit.jpeg';
 
@@ -225,7 +226,7 @@ const Home: React.FC = () => {
                             controls
                             muted
                             loop
-                            poster={IMAGE_SRC}
+                            poster={PHILOSOPHY_SRC}
                         >
                             <source src={PHILOSOPHY_VIDEO} type="video/mp4" />
                             Your browser does not support the video tag.
