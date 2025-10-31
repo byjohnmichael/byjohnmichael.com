@@ -1,6 +1,6 @@
 # Files: Environment Variables and macOS System Files
-.env
 .DS_Store
+.env
 
 # Root Directories: Build Output
 /build
