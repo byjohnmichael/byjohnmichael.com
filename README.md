@@ -1,6 +1,8 @@
 # byjohnmichael.com
 
-Portfolio website for John Michael
+### 1.0.0
+
+A digital space expressing John Michael's creative identity and projects. Built with a minimalist approach, it reflects his focus on precision, clarity, and deliberate design. The layout emphasizes balance and restraint, highlighting his dedication to clean structure and thoughtful visual rhythm. It stands as both a reflection of his process and a platform for his evolving body of work.
 
 Directed and creative decisions made [By John Michael](https://byjohnmichael.com)
 
