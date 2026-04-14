@@ -1,10 +1,21 @@
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+html {
+    min-height: 100%;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-} /* By John Michael */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 25% 75%, #90a1a3 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 20%, #5d787b 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, #7b9294 0%, transparent 70%),
+        #6f8a8d;
+    background-attachment: fixed;
+}

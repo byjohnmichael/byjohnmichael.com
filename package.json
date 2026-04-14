@@ -12,7 +12,7 @@
         "react-scripts": "^5.0.1"
     },
     "scripts": {
-        "start": "PORT=7777 react-scripts start",
+        "start": "PORT=3005 react-scripts start",
         "vercel": "npx vercel env pull .env.local && npx vercel dev --listen 7777",
         "build": "react-scripts build"
     },

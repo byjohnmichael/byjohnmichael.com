@@ -1,0 +1,16 @@
+.home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coming-soon {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+    letter-spacing: 0.22em;
+    color: #eef6f7;
+    margin: 0;
+    text-shadow: 0 1px 12px rgba(255, 255, 255, 0.15);
+}
